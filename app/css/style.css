@@ -1,0 +1,271 @@
+/* ============================================================
+   Sur les pas de saint Germain d'Auxerre — borne tactile
+   Palette tirée des frises de référence : parchemin, or vieilli,
+   terre cuite, sauge. Serif pour le récit, sans-serif pour l'UI.
+   ============================================================ */
+
+:root{
+  --parchment: #F2E9D3;
+  --parchment-deep: #E7D9B6;
+  --ink: #2E2A22;
+  --gold: #B4841F;
+  --gold-glow: #F2CE7A;
+  --terracotta: #A2532B;
+  --sage: #5C7355;
+  --sage-deep: #3F5238;
+  --paper-shadow: rgba(46, 42, 34, 0.28);
+
+  --font-display: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+  --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --radius: 18px;
+  --touch: 64px;
+}
+
+*{ box-sizing: border-box; }
+html, body{
+  margin:0; padding:0;
+  width:100%; height:100%;
+  overflow:hidden;
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  -webkit-user-select:none; user-select:none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#app{
+  position:relative;
+  width:100vw; height:100vh;
+  background:
+    radial-gradient(1200px 800px at 15% 0%, rgba(255,255,255,0.35), transparent 60%),
+    var(--parchment);
+}
+
+.screen{
+  position:absolute; inset:0;
+  opacity:0; pointer-events:none;
+  transition: opacity .35s ease;
+}
+.screen.active{ opacity:1; pointer-events:auto; }
+
+/* -------------------- Écran d'accueil -------------------- */
+.home-header{
+  text-align:center;
+  padding: 4.2vh 6vw 2vh;
+}
+.home-title{
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4.4vw, 52px);
+  font-weight: 700;
+  color: var(--terracotta);
+  margin: 0 0 .3em;
+  letter-spacing:.01em;
+}
+.home-subtitle{
+  font-size: clamp(14px, 1.5vw, 18px);
+  color: var(--sage-deep);
+  margin:0;
+}
+
+.chapter-grid{
+  display:grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 3vh 2vw;
+  padding: 1vh 6vw 4vh;
+  height: calc(100% - 18vh);
+  align-content: center;
+}
+@media (max-width: 900px){
+  .chapter-grid{ grid-template-columns: repeat(3, 1fr); }
+}
+
+.chapter-card{
+  background: none;
+  border: none;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap: 10px;
+  cursor:pointer;
+  padding: 6px;
+}
+.medallion{
+  width: clamp(72px, 9vw, 128px);
+  height: clamp(72px, 9vw, 128px);
+  border-radius: 50%;
+  overflow:hidden;
+  border: 4px solid var(--gold);
+  box-shadow: 0 6px 14px var(--paper-shadow);
+  position:relative;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.chapter-card:active .medallion{ transform: scale(.94); }
+.medallion img{
+  width:100%; height:100%; object-fit:cover;
+  display:block;
+}
+.medallion .num{
+  position:absolute; right:-2px; bottom:-2px;
+  width: 26px; height: 26px;
+  background: var(--terracotta);
+  color: var(--parchment);
+  border-radius:50%;
+  font-family: var(--font-display);
+  font-size: 13px;
+  display:flex; align-items:center; justify-content:center;
+  border: 2px solid var(--parchment);
+}
+.chapter-card .label{
+  font-size: clamp(11px, 1.05vw, 14px);
+  text-align:center;
+  max-width: 15ch;
+  line-height:1.25;
+  color: var(--ink);
+}
+
+/* -------------------- Écran chapitre -------------------- */
+#screen-chapter{
+  display:flex;
+  flex-direction:column;
+}
+.chapter-illustration{
+  flex: 1 1 58%;
+  background: var(--ink);
+  overflow:hidden;
+  position:relative;
+}
+.chapter-illustration img{
+  width:100%; height:100%;
+  object-fit: cover;
+  object-position: center;
+  display:block;
+}
+.chapter-illustration::after{
+  content:"";
+  position:absolute; inset:0;
+  box-shadow: inset 0 -40px 40px -20px rgba(0,0,0,.35);
+  pointer-events:none;
+}
+
+.chapter-panel{
+  flex: 0 0 auto;
+  background: var(--parchment-deep);
+  border-top: 3px solid var(--gold);
+  padding: 2.2vh 5vw 2.6vh;
+  display:flex;
+  flex-direction:column;
+  gap: 1.4vh;
+}
+
+.chapter-meta{ display:flex; align-items:baseline; gap:14px; }
+.chapter-index{
+  font-family: var(--font-display);
+  font-size: clamp(15px, 1.6vw, 20px);
+  color: var(--gold);
+}
+.chapter-title{
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.6vw, 32px);
+  margin:0;
+  color: var(--terracotta);
+}
+
+.audio-player{
+  display:flex;
+  align-items:center;
+  gap: 3vw;
+}
+.btn-play{
+  flex: 0 0 auto;
+  width: var(--touch); height: var(--touch);
+  border-radius:50%;
+  border: none;
+  background: var(--terracotta);
+  color: var(--parchment);
+  font-size: 22px;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow: 0 4px 10px var(--paper-shadow);
+  cursor:pointer;
+  transition: box-shadow .2s ease, transform .12s ease;
+}
+.btn-play:active{ transform: scale(.94); }
+.audio-player.playing .btn-play{
+  box-shadow: 0 0 0 8px rgba(242,206,122,.55), 0 4px 10px var(--paper-shadow);
+}
+
+.audio-progress{ flex:1; min-width:0; }
+.audio-track{
+  position:relative;
+  height: 10px;
+  background: rgba(46,42,34,.15);
+  border-radius: 6px;
+  cursor:pointer;
+}
+.audio-fill{
+  position:absolute; left:0; top:0; bottom:0;
+  width:0%;
+  background: var(--sage);
+  border-radius:6px;
+}
+.audio-handle{
+  position:absolute; top:50%; left:0%;
+  width: 20px; height:20px;
+  background: var(--parchment);
+  border: 3px solid var(--sage);
+  border-radius:50%;
+  transform: translate(-50%, -50%);
+}
+.audio-time{
+  display:flex; justify-content:space-between;
+  font-size: 12px;
+  color: var(--sage-deep);
+  margin-top: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.chapter-dots{
+  display:flex; justify-content:center; gap:8px;
+  margin-top: .2vh;
+}
+.dot{
+  width:9px; height:9px; border-radius:50%;
+  background: rgba(46,42,34,.25);
+  border:none; padding:0; cursor:pointer;
+}
+.dot.current{ background: var(--terracotta); }
+
+.btn-home{
+  position:absolute; top: 3vh; left: 3vw;
+  z-index: 5;
+  background: rgba(242,233,211,.92);
+  color: var(--ink);
+  border: 2px solid var(--gold);
+  border-radius: 999px;
+  padding: 12px 20px;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  cursor:pointer;
+  box-shadow: 0 4px 10px var(--paper-shadow);
+}
+
+.nav-arrow{
+  position:absolute; top: 29%;
+  width: 56px; height: 56px;
+  border-radius:50%;
+  border: 2px solid var(--gold);
+  background: rgba(242,233,211,.85);
+  color: var(--terracotta);
+  font-size: 28px;
+  line-height:1;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer;
+  z-index: 5;
+  box-shadow: 0 4px 10px var(--paper-shadow);
+}
+.nav-prev{ left: 3vw; }
+.nav-next{ right: 3vw; }
+
+@media (prefers-reduced-motion: reduce){
+  .screen, .medallion, .btn-play{ transition:none; }
+}

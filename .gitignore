@@ -1,0 +1,12 @@
+# Médias bruts : hors dépôt (volumineux, source de vérité locale)
+sources/
+
+# Outillage Claude Code : les skills du projet sont versionnés,
+# les fichiers locaux ne le sont pas.
+.claude/*
+!.claude/skills/
+!.claude/skills/**
+.claude/settings.local.json
+
+# macOS
+.DS_Store

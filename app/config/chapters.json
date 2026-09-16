@@ -1,0 +1,51 @@
+{
+  "titre": "Sur les pas de saint Germain d'Auxerre",
+  "sousTitre": "Une vie en dix étapes",
+  "credits": "Église Saint-Germain-l'Auxerrois — parcours de visite",
+  "autoplayALOuverture": false,
+  "_aide": "Fichier généré par le skill maj-contenu depuis ./sources — ne pas éditer à la main : relancez le skill après avoir modifié les sources. Les réglages titre / sousTitre / credits / autoplayALOuverture sont conservés d'une génération à l'autre.",
+  "chapitres": [
+    {
+      "id": "01",
+      "titre": "Accroche",
+      "image": "assets/images/01-accroche.jpg",
+      "audio": "assets/audio/01-accroche.mp3",
+      "source": "sources/chapitres/1 - Accroche.md"
+    },
+    {
+      "id": "02",
+      "titre": "Jeunesse et rivalité avec Amatre",
+      "image": "assets/images/02-jeunesse-et-rivalite-avec-amatre.jpg",
+      "audio": "assets/audio/02-jeunesse-et-rivalite-avec-amatre.mp3",
+      "source": "sources/chapitres/2 - Jeunesse et rivalité avec Amatre.md"
+    },
+    {
+      "id": "03",
+      "titre": "Évêque bâtisseur",
+      "image": "assets/images/03-eveque-batisseur.jpg",
+      "audio": "assets/audio/03-eveque-batisseur.mp3",
+      "source": "sources/chapitres/3 - Évêque bâtisseur.md"
+    },
+    {
+      "id": "04",
+      "titre": "Voyages et miracles",
+      "image": "assets/images/04-voyages-et-miracles.jpg",
+      "audio": "assets/audio/04-voyages-et-miracles.mp3",
+      "source": "sources/chapitres/4 - Voyages et miracles.md"
+    },
+    {
+      "id": "05",
+      "titre": "Rencontre avec Geneviève",
+      "image": "assets/images/05-rencontre-avec-genevieve.jpg",
+      "audio": "assets/audio/05-rencontre-avec-genevieve.mp3",
+      "source": "sources/chapitres/5 - Rencontre avec Geneviève.md"
+    },
+    {
+      "id": "06",
+      "titre": "Mort et postérité",
+      "image": "assets/images/06-mort-et-posterite.jpg",
+      "audio": "assets/audio/06-mort-et-posterite.mp3",
+      "source": "sources/chapitres/6 - Mort et postérité.md"
+    }
+  ]
+}
