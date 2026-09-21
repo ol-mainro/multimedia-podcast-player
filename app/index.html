@@ -1,61 +1,291 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>Sur les pas de saint Germain d'Auxerre</title>
-<link rel="stylesheet" href="css/style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Sur les pas de saint Germain d'Auxerre — Conjugarium</title>
+  <meta name="description" content="Application autonome de médiation culturelle et lecteur audio multimédia pour borne tactile et tablette" />
+  <meta property="og:title" content="Sur les pas de saint Germain d'Auxerre" />
+  <meta property="og:description" content="Application autonome de médiation culturelle et lecteur audio multimédia pour borne tactile et tablette" />
+  <meta property="og:image" content="assets/images/01-accroche.jpg" />
+
+  <!-- Polices du Design System Conjugarium (Lexend + Gaegu en repli de Simply Olive) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-
-<div id="app">
-
-  <!-- Écran d'accueil : sommaire des chapitres -->
-  <section id="screen-home" class="screen active">
-    <header class="home-header">
-      <h1 class="home-title" id="app-title">Sur les pas de saint Germain d'Auxerre</h1>
-      <p class="home-subtitle" id="app-subtitle">Touchez un chapitre pour l'écouter</p>
+  <div id="app" class="cl-page">
+    <!-- En-tête de la page publique -->
+    <header class="cl-header" id="page-header">
+      <div class="cjg-brand-mark" aria-hidden="true">
+        <!-- Logo / Emblème sonore -->
+        <svg viewBox="0 0 256 256">
+          <path fill="currentColor" d="M160 32v130.68A48 48 0 1 1 128 120V32a8 8 0 0 1 8-8h24a8 8 0 0 1 0 16h-16v64h16a8 8 0 0 1 0 16h-16v24a32 32 0 1 0 32 32V32a8 8 0 0 1 8-8h24a8 8 0 0 1 0 16h-16v64a8 8 0 0 1-16 0V32a8 8 0 0 1 8-8h-32a8 8 0 0 1-8 8Z" opacity="0.2"/>
+          <path fill="currentColor" d="M152 32v130.68A48 48 0 1 1 128 120V32a8 8 0 0 1 8-8h48a8 8 0 0 1 0 16h-32v72h32a8 8 0 0 1 0 16h-32v24a32 32 0 1 0 32 32V32a8 8 0 0 1 8-8h24a8 8 0 0 1 0 16h-16v88a8 8 0 0 1-16 0V32a8 8 0 0 0-8-8h-48a8 8 0 0 0-8 8Zm-40 160a32 32 0 1 0-32-32a32 32 0 0 0 32 32Z"/>
+        </svg>
+      </div>
+      <p class="cl-tagline">
+        Médiation sonore &amp; récit illustré<br />
+        <span class="cl-tagline__accent" id="header-subtitle">Église Saint-Germain-l'Auxerrois</span>
+      </p>
     </header>
-    <div class="chapter-grid" id="chapter-grid"></div>
-  </section>
 
-  <!-- Écran chapitre : illustration + lecteur audio -->
-  <section id="screen-chapter" class="screen">
-    <button class="btn-home" id="btn-home">⌂ Sommaire</button>
-    <button class="nav-arrow nav-prev" id="btn-prev">‹</button>
-    <button class="nav-arrow nav-next" id="btn-next">›</button>
+    <!-- Transition nuages : clair vers sombre -->
+    <div class="cl-wave" style="--wave-from: var(--surface); --wave-to: var(--surface-invert)"></div>
 
-    <div class="chapter-illustration">
-      <img id="chapter-image" src="" alt="" />
+    <!-- Bande de rupture sombre : le cœur de l'expérience d'écoute -->
+    <main class="cl-section-invert cl-invert" id="main-content">
+      <div class="cl-container">
+
+        <!-- Scène active de lecture d'épisode (remplit l'espace avec son propre texte et image ou vidéo en boucle) -->
+        <section class="cl-playback-stage" id="hero-section" aria-label="Scène de lecture de l'épisode">
+          <div class="cl-playback-stage__grid">
+            <!-- Colonne Média : Image ou Vidéo silencieuse jouée en boucle -->
+            <div class="cl-playback-stage__media-col">
+              <div class="cl-stage-media-wrap" id="stage-media-wrap">
+                <img id="hero-cover" class="cl-stage-media__item" src="assets/images/01-accroche.jpg" alt="Illustration de l'épisode" />
+                <video id="hero-video" class="cl-stage-media__item" playsinline loop muted autoplay style="display: none;"></video>
+                <div class="cl-stage-media__overlay">
+                  <span id="hero-media-badge" class="cl-stage-media-pill">
+                    <svg class="cjg-icon cjg-icon--sm" viewBox="0 0 256 256"><path fill="currentColor" d="M216 40H40a16 16 0 0 0-16 16v144a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V56a16 16 0 0 0-16-16Zm0 160H40V56h176v144ZM96 96a16 16 0 1 1-16-16a16 16 0 0 1 16 16Zm104 88H56l48-64l36 48l24-32l40 48Z"/></svg>
+                    <span id="hero-media-badge-text">Illustration</span>
+                  </span>
+                  <button id="btn-expand-stage" class="cl-btn-media-expand" title="Agrandir en grand format" aria-label="Agrandir en grand format">
+                    <svg class="cjg-icon cjg-icon--sm" viewBox="0 0 256 256"><path fill="currentColor" d="M216 48v48a8 8 0 0 1-16 0V67.31l-42.34 42.35a8 8 0 0 1-11.32-11.32L188.69 56H160a8 8 0 0 1 0-16h48a8 8 0 0 1 8 8ZM109.66 146.34L67.31 188.69V160a8 8 0 0 0-16 0v48a8 8 0 0 0 8 8h48a8 8 0 0 0 0-16H78.63l42.35-42.34a8 8 0 0 0-11.32-11.32ZM208 152a8 8 0 0 0-8 8v28.69l-42.34-42.35a8 8 0 0 0-11.32 11.32L188.69 200H160a8 8 0 0 0 0 16h48a8 8 0 0 0 8-8v-48a8 8 0 0 0-8-8ZM67.31 67.31L109.66 109.66a8 8 0 0 0 11.32-11.32L78.63 56H108a8 8 0 0 0 0-16H60a8 8 0 0 0-8 8v48a8 8 0 0 0 16 0V67.31Z"/></svg>
+                    <span>Agrandir</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Colonne Récit textuel propre à l'épisode -->
+            <div class="cl-playback-stage__story-col">
+              <div class="cl-stage-topbar">
+                <div class="cl-stage-badges">
+                  <span id="hero-chapter-badge" class="cl-badge">Épisode 01 / 06</span>
+                  <span id="hero-type-indicator" class="cl-badge cl-badge--ghost">Illustration</span>
+                  <span id="badge-chapter-count" class="cl-badge cl-badge--success">✓ 6 chapitres</span>
+                </div>
+                <button id="btn-toggle-fullscreen" class="cl-btn cl-btn--ghost" aria-label="Basculer en mode plein écran">Plein écran</button>
+              </div>
+
+              <div class="cl-stage-headings">
+                <div class="cl-stage-tour-context">
+                  <span id="app-title">Sur les pas de saint Germain d'Auxerre</span> • <span id="app-subtitle">Une vie en six étapes</span>
+                  <span id="app-meta" style="display:none;">6 épisodes</span>
+                </div>
+                <h1 id="hero-chapter-title" class="cl-stage-title">Accroche</h1>
+                <p id="hero-chapter-subtitle" class="cl-stage-subtitle">D'aristocrate romain amateur de chasse à l'un des plus grands saints de Gaule</p>
+              </div>
+
+              <!-- Récit textuel complet de l'épisode -->
+              <div class="cl-stage-narrative-card">
+                <div class="cl-stage-narrative-header">
+                  <svg class="cjg-icon cjg-icon--sm" viewBox="0 0 256 256"><path fill="currentColor" d="M216 40H40a16 16 0 0 0-16 16v144a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V56a16 16 0 0 0-16-16Zm0 160H40V56h176v144ZM72 88a8 8 0 0 1 8-8h96a8 8 0 0 1 0 16H80a8 8 0 0 1-8-8Zm0 40a8 8 0 0 1 8-8h96a8 8 0 0 1 0 16H80a8 8 0 0 1-8-8Zm0 40a8 8 0 0 1 8-8h64a8 8 0 0 1 0 16H80a8 8 0 0 1-8-8Z"/></svg>
+                  <span>Récit de l'épisode</span>
+                </div>
+                <div id="hero-chapter-text" class="cl-stage-narrative-text">
+                  <!-- Texte dynamique injecté en JS -->
+                </div>
+              </div>
+
+              <!-- Commandes directes de lecture de l'épisode -->
+              <div class="cl-stage-controls">
+                <button id="stage-prev-btn" class="cl-btn cl-btn--ghost" aria-label="Épisode précédent">‹ Précédent</button>
+                <button id="stage-play-btn" class="cl-btn cl-stage-play-btn" aria-label="Écouter l'épisode">
+                  <svg class="cjg-icon" viewBox="0 0 256 256" id="stage-play-icon">
+                    <path fill="currentColor" d="M240 128a15.74 15.74 0 0 1-7.6 13.51L88.32 229.65a16 16 0 0 1-16.2.3A15.86 15.86 0 0 1 64 216.13V39.87a15.86 15.86 0 0 1 8.12-13.82a16 16 0 0 1 16.2.3l144.08 88.14A15.74 15.74 0 0 1 240 128Z"/>
+                  </svg>
+                  <span id="stage-play-label">Écouter l'épisode</span>
+                </button>
+                <button id="stage-next-btn" class="cl-btn cl-btn--ghost" aria-label="Épisode suivant">Suivant ›</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Bannière d'action mise en avant -->
+        <div class="cl-card cl-card--accent cl-banner" style="margin-bottom: var(--sp-8);">
+          <div class="cl-banner__left">
+            <div class="cl-banner__icon" aria-hidden="true">
+              <svg class="cjg-icon cjg-icon--lg" viewBox="0 0 256 256">
+                <path fill="currentColor" d="M240 128a15.74 15.74 0 0 1-7.6 13.51L88.32 229.65a16 16 0 0 1-16.2.3A15.86 15.86 0 0 1 64 216.13V39.87a15.86 15.86 0 0 1 8.12-13.82a16 16 0 0 1 16.2.3l144.08 88.14A15.74 15.74 0 0 1 240 128Z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="cl-banner__title">Écoute intégrale du parcours</div>
+              <div class="cl-banner__subtitle">Démarrez depuis l'introduction ou naviguez directement vers l'épisode de votre choix</div>
+            </div>
+          </div>
+          <button id="btn-play-all" class="cl-btn cl-btn--lg" aria-label="Démarrer l'écoute intégrale">
+            <svg class="cjg-icon" viewBox="0 0 256 256">
+              <path fill="currentColor" d="M240 128a15.74 15.74 0 0 1-7.6 13.51L88.32 229.65a16 16 0 0 1-16.2.3A15.86 15.86 0 0 1 64 216.13V39.87a15.86 15.86 0 0 1 8.12-13.82a16 16 0 0 1 16.2.3l144.08 88.14A15.74 15.74 0 0 1 240 128Z"/>
+            </svg>
+            Écouter tout le parcours
+          </button>
+        </div>
+
+        <!-- Contrôles : recherche et bascule de vue -->
+        <div class="cl-controls">
+          <div class="cl-search">
+            <span class="cl-search__icon" aria-hidden="true">
+              <svg class="cjg-icon cjg-icon--sm" viewBox="0 0 256 256">
+                <path fill="currentColor" d="m229.66 218.34l-50.07-50.06a88.11 88.11 0 1 0-11.31 11.31l50.06 50.07a8 8 0 0 0 11.32-11.32ZM40 112a72 72 0 1 1 72 72a72.08 72.08 0 0 1-72-72Z"/>
+              </svg>
+            </span>
+            <input id="search-input" class="cl-search__input" type="search" placeholder="Rechercher un chapitre, un épisode…" aria-label="Rechercher un chapitre" />
+          </div>
+
+          <div class="cl-pills" role="tablist" aria-label="Mode d'affichage">
+            <button id="tab-playlist" class="cl-pill cl-pill--active" role="tab" aria-selected="true">Liste d'écoute</button>
+            <button id="tab-gallery" class="cl-pill" role="tab" aria-selected="false">Galerie illustrée</button>
+          </div>
+        </div>
+
+        <!-- Vue 1 : Playlist centrale (contrat .cl-playlist) -->
+        <ul id="chapter-playlist" class="cl-playlist" role="list">
+          <!-- Généré dynamiquement en JS -->
+        </ul>
+
+        <!-- Vue 2 : Grille de cartes illustrées (Mode Borne) -->
+        <div id="chapter-grid" class="chapter-cards-grid" style="display: none;">
+          <!-- Généré dynamiquement en JS -->
+        </div>
+
+        <!-- Message aucun résultat -->
+        <div id="empty-results" class="cl-empty" style="display: none;">
+          Aucun chapitre ne correspond à votre recherche.
+        </div>
+      </div>
+    </main>
+
+    <!-- Transition nuages : sombre vers clair -->
+    <div class="cl-wave" style="--wave-from: var(--surface-invert); --wave-to: var(--surface)"></div>
+
+    <!-- Section Claire : À propos & Contexte -->
+    <section class="cl-section-light">
+      <div class="cl-prose">
+        <h2 class="cl-section-title">À propos <span class="cl-section-title__accent">du parcours</span></h2>
+        <p class="cl-text">
+          Ce parcours sonore immersif retrace les grandes étapes de la vie de saint Germain d'Auxerre (vers 378 – 448), figure majeure de la Gaule chrétienne de l'Antiquité tardive, magistrat devenu évêque et bâtisseur.
+        </p>
+        <p class="cl-desc">
+          Conçu pour une consultation tactile in situ dans l'église Saint-Germain-l'Auxerrois à Paris comme à distance sur tout appareil, chaque chapitre s'accompagne d'une illustration d'époque et d'un commentaire audio.
+        </p>
+      </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer class="cl-footer">
+      <p id="footer-tagline" class="cl-footer__tagline">Église Saint-Germain-l'Auxerrois — parcours de visite</p>
+      <a class="cl-footer__link" href="https://saintgermainlauxerrois.fr" target="_blank" rel="noopener noreferrer">saintgermainlauxerrois.fr</a>
+      <p class="cl-footer__legal">© Clap ! Éditions — Design System Conjugarium</p>
+    </footer>
+
+    <!-- Lecteur audio flottant fixe en bas de page -->
+    <div id="floating-player" class="cl-player" role="region" aria-label="Lecteur audio">
+      <div class="cl-player__inner">
+        <button id="player-play-btn" class="cl-player__play" aria-label="Écouter">
+          <svg class="cjg-icon" viewBox="0 0 256 256" id="player-play-icon">
+            <path fill="currentColor" d="M240 128a15.74 15.74 0 0 1-7.6 13.51L88.32 229.65a16 16 0 0 1-16.2.3A15.86 15.86 0 0 1 64 216.13V39.87a15.86 15.86 0 0 1 8.12-13.82a16 16 0 0 1 16.2.3l144.08 88.14A15.74 15.74 0 0 1 240 128Z"/>
+          </svg>
+        </button>
+        <div class="cl-player__meta">
+          <div id="player-title" class="cl-player__title">01 — Accroche</div>
+          <div class="cl-player__progress">
+            <span id="player-time-current" class="cl-player__time">0:00</span>
+            <input id="player-seek" class="cl-range" type="range" min="0" max="100" value="0" aria-label="Progression de lecture" />
+            <span id="player-time-total" class="cl-player__time">0:00</span>
+          </div>
+        </div>
+        <div class="cl-player__side">
+          <button id="player-view-btn" class="cl-player__iconbtn" title="Voir l'illustration en grand" aria-label="Voir l'illustration en grand">
+            <svg class="cjg-icon" viewBox="0 0 256 256">
+              <path fill="currentColor" d="M216 40H40a16 16 0 0 0-16 16v144a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V56a16 16 0 0 0-16-16Zm0 160H40V56h176v144ZM96 96a16 16 0 1 1-16-16a16 16 0 0 1 16 16Zm104 88H56l48-64l36 48l24-32l40 48Z"/>
+            </svg>
+          </button>
+          <button id="player-mute-btn" class="cl-player__iconbtn" title="Activer / couper le son" aria-label="Activer / couper le son">
+            <svg class="cjg-icon" viewBox="0 0 256 256" id="player-mute-icon">
+              <path fill="currentColor" d="M168 32a8 8 0 0 0-8.76 1.15L89.47 96H40a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h49.47l69.77 62.85A8 8 0 0 0 176 216V40a8 8 0 0 0-8-8Zm-8 163.69l-61.47-55.32A8 8 0 0 0 93.19 138H40v-20h53.19a8 8 0 0 0 5.34-2.37L160 60.31ZM216 128a55.93 55.93 0 0 1-16.4 39.6a8 8 0 1 1-11.32-11.31a40 40 0 0 0 0-56.58a8 8 0 1 1 11.32-11.31A55.93 55.93 0 0 1 216 128Z"/>
+            </svg>
+          </button>
+          <input id="player-volume" class="cl-range cl-range--volume" type="range" min="0" max="1" step="0.05" value="1" aria-label="Volume sonore" />
+        </div>
+      </div>
     </div>
 
-    <div class="chapter-panel">
-      <div class="chapter-meta">
-        <span class="chapter-index" id="chapter-index"></span>
-        <h2 class="chapter-title" id="chapter-title"></h2>
-      </div>
+    <!-- Espace de réserve pour ne jamais masquer le contenu sous le lecteur fixe -->
+    <div class="cl-player-spacer"></div>
 
-      <div class="audio-player">
-        <button class="btn-play" id="btn-play" aria-label="Écouter">▶</button>
-        <div class="audio-progress">
-          <div class="audio-track" id="audio-track">
-            <div class="audio-fill" id="audio-fill"></div>
-            <div class="audio-handle" id="audio-handle"></div>
+    <!-- Modal d'illustration & récit plein écran (Mode Borne / Focus) -->
+    <div id="chapter-viewer-modal" class="cjg-viewer-modal" role="dialog" aria-modal="true" aria-label="Visualiseur de chapitre">
+      <div class="cjg-viewer-box">
+        <div class="cjg-viewer-header">
+          <div class="cjg-viewer-header__info">
+            <span id="viewer-badge" class="cl-badge">Chapitre 01</span>
+            <span id="viewer-media-tag" class="cl-badge cl-badge--ghost">Illustration</span>
+            <h3 id="viewer-title" class="cl-banner__title" style="margin:0; font-size:1.15rem;">Accroche</h3>
           </div>
-          <div class="audio-time">
-            <span id="time-current">0:00</span>
-            <span id="time-total">0:00</span>
+          <button id="viewer-close-btn" class="cl-btn cl-btn--ghost" aria-label="Fermer la vue détaillée">
+            ✕ Fermer
+          </button>
+        </div>
+
+        <div class="cjg-viewer-split">
+          <!-- Zone Média : Image ou Vidéo silencieuse jouée en boucle -->
+          <div class="cjg-viewer-stage" id="viewer-stage-container">
+            <button id="viewer-prev-btn" class="cjg-viewer-arrow cjg-viewer-arrow--prev" aria-label="Chapitre précédent">‹</button>
+            <img id="viewer-img" src="" alt="Illustration du chapitre" />
+            <video id="viewer-video" playsinline loop muted autoplay style="display:none;"></video>
+            <button id="viewer-next-btn" class="cjg-viewer-arrow cjg-viewer-arrow--next" aria-label="Chapitre suivant">›</button>
+            <div class="cjg-viewer-media-indicator" id="viewer-media-indicator">
+              <!-- Dynamique : Vidéo silencieuse en boucle / Illustration -->
+            </div>
+          </div>
+
+          <!-- Zone Récit textuel : Remplit l'espace avec son propre texte -->
+          <div class="cjg-viewer-story-panel">
+            <div class="cjg-viewer-story-header">
+              <span class="cl-badge cl-badge--ghost">Récit intégral de l'épisode</span>
+              <h4 id="viewer-story-title" class="cjg-viewer-story-title">Accroche</h4>
+              <p id="viewer-subtitle" class="cjg-viewer-story-subtitle">D'aristocrate romain amateur de chasse à l'un des plus grands saints de Gaule</p>
+            </div>
+            <div class="cjg-viewer-narrative" id="viewer-text">
+              <!-- Récit complet de l'épisode injecté en JS -->
+            </div>
+          </div>
+        </div>
+
+        <div class="cjg-viewer-footer">
+          <div id="viewer-stepper" class="cjg-viewer-stepper">
+            <!-- Points de pagination générés en JS -->
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <button id="viewer-play-btn" class="cl-btn" aria-label="Écouter cet épisode">
+              <svg class="cjg-icon" viewBox="0 0 256 256" id="viewer-play-icon">
+                <path fill="currentColor" d="M240 128a15.74 15.74 0 0 1-7.6 13.51L88.32 229.65a16 16 0 0 1-16.2.3A15.86 15.86 0 0 1 64 216.13V39.87a15.86 15.86 0 0 1 8.12-13.82a16 16 0 0 1 16.2.3l144.08 88.14A15.74 15.74 0 0 1 240 128Z"/>
+              </svg>
+              <span id="viewer-play-label">Écouter l'épisode</span>
+            </button>
+            <span class="cl-desc" style="font-size: 0.85rem;">
+              Glissez (swipe) ou utilisez les flèches du clavier pour parcourir
+            </span>
           </div>
         </div>
       </div>
-
-      <div class="chapter-dots" id="chapter-dots"></div>
     </div>
-  </section>
+  </div>
 
-</div>
+  <!-- Élément audio natif HTML5 -->
+  <audio id="audio-engine" preload="metadata"></audio>
 
-<audio id="audio-player-el" preload="none"></audio>
-<script src="js/app.js"></script>
+  <!-- Script d'application -->
+  <script src="js/app.js"></script>
 </body>
 </html>

@@ -1,50 +1,74 @@
 {
   "titre": "Sur les pas de saint Germain d'Auxerre",
-  "sousTitre": "Une vie en dix étapes",
+  "sousTitre": "Une vie en six étapes",
   "credits": "Église Saint-Germain-l'Auxerrois — parcours de visite",
   "autoplayALOuverture": false,
-  "_aide": "Fichier généré par le skill maj-contenu depuis ./sources — ne pas éditer à la main : relancez le skill après avoir modifié les sources. Les réglages titre / sousTitre / credits / autoplayALOuverture sont conservés d'une génération à l'autre.",
+  "_aide": "Fichier de configuration enrichi. Chaque épisode dispose de son texte complet et de son média associé (image ou vidéo silencieuse jouée en boucle).",
   "chapitres": [
     {
       "id": "01",
       "titre": "Accroche",
+      "sousTitre": "D'aristocrate romain amateur de chasse à l'un des plus grands saints de Gaule",
+      "mediaType": "image",
       "image": "assets/images/01-accroche.jpg",
+      "video": null,
       "audio": "assets/audio/01-accroche.mp3",
+      "texte": "Est-ce qu'un homme qui aime le luxe, la bonne chère et les grandes parties de chasse peut devenir un saint ? À première vue, ce n'est pas le chemin le plus direct. Et pourtant, c'est bien ce qui arriva à Germain d'Auxerre.\n\nMais comment cet aristocrate romain, ce gouverneur un peu provocateur, a-t-il pu devenir l'un des saints les plus célèbres de notre histoire ? Pour le comprendre, il faut reprendre les choses dans l'ordre.",
       "source": "sources/chapitres/1 - Accroche.md"
     },
     {
       "id": "02",
       "titre": "Jeunesse et rivalité avec Amatre",
+      "sousTitre": "Le poirier païen abattu et la tonsure inattendue imposée par l'évêque Amâtre",
+      "mediaType": "image",
       "image": "assets/images/02-jeunesse-et-rivalite-avec-amatre.jpg",
+      "video": null,
       "audio": "assets/audio/02-jeunesse-et-rivalite-avec-amatre.mp3",
+      "texte": "Nous sommes à la fin du IVe siècle. L'Empire romain existe encore, mais il vacille. Le christianisme, longtemps persécuté, lui, progresse. Le monde ancien commence à disparaître, mais le monde nouveau, lui, n'est pas encore né.\n\nEt c'est dans cette époque troublée que grandit le jeune Germain. Issu d'une riche famille gallo-romaine établie près d'Auxerre, alors appelée Autessiodorum, il étudie le droit à Rome avant de revenir en Gaule. Il devient gouverneur, exerce d'importantes responsabilités et épouse Eustachie, une femme de haute naissance. Riche, puissant et respecté, Germain a tout pour lui.\n\nMais à Auxerre vit un autre homme d'autorité, l'évêque Amâtre. Entre eux, l'entente est… délicate. Oui, Germain a un péché mignon qui agace prodigieusement l'évêque Amâtre : le gouverneur adore la chasse et, après chaque battue, il fait suspendre les têtes de ses gibiers aux branches d'un grand poirier, en plein centre d'Auxerre. Pour lui, c'est une manière d'exhiber ses victoires, mais pour Amâtre, c'est une provocation, un reste de vieux rite païen insupportable.\n\nAlors, un jour, profitant de l'absence du gouverneur, l'évêque Amâtre fait abattre le poirier. Et c'est là que l'histoire prend un tour inattendu. Amâtre aurait eu une vision : Germain, son adversaire, deviendra son successeur. Alors, il le fait arrêter pour le traîner dans la cathédrale, lui couper les cheveux et lui imposer la tonsure. En un instant, l'homme de pouvoir devient diacre.\n\nLa légende s'est sans doute mêlée à l'histoire, mais une chose est certaine : à la mort d'Amâtre en 418, Germain devient évêque d'Auxerre.",
       "source": "sources/chapitres/2 - Jeunesse et rivalité avec Amatre.md"
     },
     {
       "id": "03",
       "titre": "Évêque bâtisseur",
+      "sousTitre": "Le renoncement aux fastes et les fondations sur les rives de l'Yonne",
+      "mediaType": "image",
       "image": "assets/images/03-eveque-batisseur.jpg",
+      "video": null,
       "audio": "assets/audio/03-eveque-batisseur.mp3",
+      "texte": "La vie de Germain changea alors du tout au tout. Il renonce aux fastes, distribue une grande partie de sa fortune aux plus démunis et adopte une existence modeste. Mais Germain n'a rien perdu de son énergie.\n\nL'ancien administrateur devient un bâtisseur et un diplomate infatigable. Près de son palais, tout d'abord, il fait construire une chapelle destinée à abriter les reliques de Saint-Alban. Puis, sur l'autre rive de l'Yonne, il fonde un monastère où il aime se retirer, loin du pouvoir et du bruit. Sur ces terres, il fait également bâtir un modeste oratoire dédié à Saint-Maurice. C'est autour de cette petite chapelle que s'élèvera, bien plus tard, l'abbaye Saint-Germain. Mais revenons à notre histoire.",
       "source": "sources/chapitres/3 - Évêque bâtisseur.md"
     },
     {
       "id": "04",
       "titre": "Voyages et miracles",
+      "sousTitre": "Plaidoyer à Arles, paix en Armorique et miracles sur les routes de Gaule",
+      "mediaType": "video",
       "image": "assets/images/04-voyages-et-miracles.jpg",
+      "video": "assets/videos/04-voyages-et-miracles.mp4",
       "audio": "assets/audio/04-voyages-et-miracles.mp3",
+      "texte": "Être évêque à cette époque ne signifie pas rester dans une cathédrale. Non. Germain voyage beaucoup.\n\nLorsque les habitants de sa région sont écrasés par les impôts, il se rend jusqu'à Arles et plaide leur cause devant les autorités romaines. Quand les armées barbares menacent de tout massacrer en Armorique, il monte sur son cheval, va à la rencontre du chef ennemi et, par la seule force de son éloquence, réussit à arrêter la guerre.\n\nOn raconte qu'il fait des miracles partout où il passe : il calme les tempêtes, guérit les malades, et on dit même qu'un bâton qu'il avait planté en terre s'est transformé en un arbre magnifique.",
       "source": "sources/chapitres/4 - Voyages et miracles.md"
     },
     {
       "id": "05",
       "titre": "Rencontre avec Geneviève",
+      "sousTitre": "L'étape à Nanterre et la bénédiction de la future sainte patronne de Paris",
+      "mediaType": "video",
       "image": "assets/images/05-rencontre-avec-genevieve.jpg",
+      "video": "assets/videos/05-rencontre-avec-genevieve.mp4",
       "audio": "assets/audio/05-rencontre-avec-genevieve.mp3",
+      "texte": "Au cours de ses voyages incessants pour défendre la foi, Germain s'arrête un jour dans le petit village de Nanterre près de Paris.\n\nDans la foule, son regard se pose sur une petite fille. Il devine en elle une force exceptionnelle, il la bénit et demande à ses parents de veiller sur sa destinée.\n\nCet enfant, c'est sainte Geneviève. Vous la connaissez ?",
       "source": "sources/chapitres/5 - Rencontre avec Geneviève.md"
     },
     {
       "id": "06",
       "titre": "Mort et postérité",
+      "sousTitre": "L'ultime mission à Ravenne et l'immense cortège de retour à Auxerre",
+      "mediaType": "image",
       "image": "assets/images/06-mort-et-posterite.jpg",
+      "video": null,
       "audio": "assets/audio/06-mort-et-posterite.mp3",
+      "texte": "Vers la fin de sa vie, Germain entreprend un dernier voyage jusqu'à Ravenne en Italie. Une fois encore, il veut plaider la paix pour l'Armorique.\n\nMais épuisé par ses missions, il tombe malade et meurt loin de chez lui, le 31 juillet 448. Son retour à Auxerre prend alors l'allure d'une procession. Pendant plusieurs semaines, un immense cortège accompagne son corps jusqu'à sa dernière demeure, dans l'oratoire qu'il avait lui-même fondé.",
       "source": "sources/chapitres/6 - Mort et postérité.md"
     }
   ]

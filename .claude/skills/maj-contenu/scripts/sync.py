@@ -22,6 +22,7 @@ import unicodedata
 LARGEUR_MAX_IMAGE = 1600  # px, côté le plus long
 EXT_IMAGES = (".jpg", ".jpeg", ".png", ".webp")
 EXT_AUDIO = (".mp3", ".m4a", ".wav", ".ogg")
+EXT_VIDEOS = (".mp4", ".webm", ".mov")
 
 
 def slug(texte):
@@ -38,18 +39,40 @@ def prefixe_num(nom):
     return int(m.group(1)), m.group(2).strip()
 
 
-def titre_depuis_md(chemin, repli):
+def extraire_md_details(chemin, repli_titre):
+    titre = repli_titre
+    sous_titre = ""
+    if not chemin or not os.path.isfile(chemin):
+        return titre, sous_titre, ""
     try:
         with open(chemin, encoding="utf-8") as f:
-            for ligne in f:
-                ligne = ligne.strip()
-                if ligne.startswith("#"):
-                    return ligne.lstrip("#").strip()
-                if ligne:
-                    break
+            lignes = f.read().splitlines()
+        i = 0
+        while i < len(lignes):
+            l = lignes[i].strip()
+            if l.startswith("#"):
+                titre = l.lstrip("#").strip()
+                i += 1
+                break
+            i += 1
+        while i < len(lignes):
+            l = lignes[i].strip()
+            if l.startswith("**") and l.endswith("**"):
+                sous_titre = l.strip("*").strip()
+                i += 1
+                break
+            elif l:
+                break
+            i += 1
+        texte = "\n".join(lignes[i:]).strip()
+        return titre, sous_titre, texte
     except OSError:
-        pass
-    return repli
+        return titre, sous_titre, ""
+
+
+def titre_depuis_md(chemin, repli):
+    t, _, _ = extraire_md_details(chemin, repli)
+    return t
 
 
 def lister_chapitres(dossier):
@@ -196,11 +219,39 @@ def main():
         else:
             avertissements.append("Chapitre %s (%s) : aucune image disponible" % (ident, titre))
 
+        # Vérifie si une vidéo silencieuse existe pour ce chapitre
+        dossier_videos = os.path.join(app, "assets", "videos")
+        os.makedirs(dossier_videos, exist_ok=True)
+        nom_video = None
+        candidats_video = [
+            os.path.join(sources, "videos", base + ".mp4"),
+            os.path.join(sources, "videos", base + ".webm"),
+            os.path.join(dossier_videos, base + ".mp4"),
+            os.path.join(dossier_videos, base + ".webm")
+        ]
+        for cv in candidats_video:
+            if os.path.isfile(cv):
+                ext_v = os.path.splitext(cv)[1].lower()
+                nom_video = base + ext_v
+                dest_v = os.path.join(dossier_videos, nom_video)
+                if cv != dest_v and not args.dry_run:
+                    shutil.copy2(cv, dest_v)
+                journal.append("video     " + os.path.basename(cv) + "  ->  assets/videos/" + nom_video)
+                break
+
+        _, sous_titre_md, texte_md = extraire_md_details(chemin_md, titre)
+
         chapitre = {"id": ident, "titre": titre}
+        if sous_titre_md:
+            chapitre["sousTitre"] = sous_titre_md
+        chapitre["mediaType"] = "video" if nom_video else "image"
         if nom_image:
             chapitre["image"] = "assets/images/" + nom_image
+        chapitre["video"] = ("assets/videos/" + nom_video) if nom_video else None
         if nom_audio:
             chapitre["audio"] = "assets/audio/" + nom_audio
+        if texte_md:
+            chapitre["texte"] = texte_md
         if chemin_md:
             chapitre["source"] = os.path.relpath(chemin_md, racine)
         chapitres.append(chapitre)
