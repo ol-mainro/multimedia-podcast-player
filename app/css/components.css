@@ -297,6 +297,26 @@ img { max-width: 100%; display: block; }
   justify-content: center;
   flex-shrink: 0;
   font-size: 1.5rem;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  box-shadow: var(--shadow-accent);
+  transition: transform var(--t-fast), background var(--t-fast), box-shadow var(--t-fast);
+}
+
+.cl-banner__icon:hover {
+  transform: scale(1.08);
+  background: var(--accent-hover);
+  box-shadow: var(--shadow-accent-lg);
+}
+
+.cl-banner__icon:active {
+  transform: scale(0.96);
+}
+
+.cl-banner__icon:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
 }
 
 .cl-banner__title {
@@ -390,7 +410,7 @@ img { max-width: 100%; display: block; }
 /* ── Filtres ── */
 .cl-controls {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   gap: var(--sp-4);
   margin-bottom: var(--sp-6);

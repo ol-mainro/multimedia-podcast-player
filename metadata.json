@@ -1,6 +1,6 @@
 {
   "name": "Sur les pas de saint Germain d'Auxerre",
-  "description": "Application autonome de médiation culturelle et lecteur audio multimédia pour borne tactile et tablette",
+  "description": "Fin du IVe siècle. L'Empire romain vacille et le christianisme progresse. Germain l'Auxerrois.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
